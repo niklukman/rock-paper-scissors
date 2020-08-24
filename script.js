@@ -1,34 +1,33 @@
-let computerChoice;
-
+let computerSelection = '';
 const computerPlay = () => {
   let num = Math.floor(Math.random() * 3);
   switch (num) {
     case 0:
-      return (computerChoice = 'Rock');
+      computerSelection = 'Rock';
       break;
     case 1:
-      return (computerChoice = 'Paper');
+      computerSelection = 'Paper';
       break;
     case 2:
-      return (computerChoice = 'Scissors');
+      computerSelection = 'Scissors';
       break;
   }
 };
 
-let playerChoice;
-
-console.log('1 is Rock\n2 is Paper\n3 is Scissors');
+let playerSelection = '';
 const playerPlay = () => {
-  let num2 = Number(prompt('Please choose your play: '));
+  let num2 = Number(
+    prompt('Please choose your play: \n1 is Rock\n2 is Paper\n3 is Scissors')
+  );
   switch (num2) {
     case 1:
-      return (playerChoice = 'Rock');
+      playerSelection = 'Rock';
       break;
     case 2:
-      return (playerChoice = 'Paper');
+      playerSelection = 'Paper';
       break;
     case 3:
-      return (playerChoice = 'Scissors');
+      playerSelection = 'Scissors';
       break;
     default:
       alert('invalid');
@@ -36,7 +35,27 @@ const playerPlay = () => {
   }
 };
 
-//playerPlay();
-// computerPlay();
+const rockPaperScissors = (computerSelection, playerSelection) => {
+  console.log(`computer = ${computerSelection}, player = ${playerSelection}`);
+  if (computerSelection === playerSelection) {
+    return 'Draw';
+  } else if (
+    (computerSelection === 'Rock' && playerSelection === 'Scissors') ||
+    (computerSelection === 'Scissors' && playerSelection === 'Paper') ||
+    (computerSelection === 'Paper' && playerSelection === 'Rock')
+  ) {
+    return `You Lose! ${computerSelection} beats ${playerSelection}`;
+  } else {
+    return `You Win! ${playerSelection} beats ${computerSelection}`;
+  }
+};
 
-console.log(playerChoice);
+let game = () => {
+  for (let i = 0; i < 5; i++) {
+    playerPlay();
+    computerPlay();
+    console.log(rockPaperScissors(computerSelection, playerSelection));
+  }
+};
+
+game();
